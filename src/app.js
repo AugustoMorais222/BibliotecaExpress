@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require('mongoose')
 const path = require('path');
 const homeRoute = require('./routes/homeRoute');
+const usuarioRoute = require('./routes/usuarioRoute');
+
 
 /*
 mongoose.connect(process.env.CONNECTIONSTRING)  
@@ -13,5 +15,7 @@ mongoose.connect(process.env.CONNECTIONSTRING)
     })
     .catch(e => console.log(e));
 */
+app.use(espress.json());
 app.use("/",homeRoute);
+app.use("/usuario", usuarioRoute);
 module.exports = app;
