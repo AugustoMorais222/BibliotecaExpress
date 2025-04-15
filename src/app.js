@@ -6,16 +6,14 @@ const path = require('path');
 const homeRoute = require('./routes/homeRoute');
 const usuarioRoute = require('./routes/usuarioRoute');
 
-
-/*
 mongoose.connect(process.env.CONNECTIONSTRING)  
     .then(() =>{
         console.log("Conectado ao banco");
         app.emit('conectado')
     })
     .catch(e => console.log(e));
-*/
-app.use(espress.json());
+
+app.use(express.json());
 app.use("/",homeRoute);
 app.use("/usuario", usuarioRoute);
 module.exports = app;

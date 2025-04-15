@@ -1,6 +1,6 @@
 const Usuario = require('../models/usuarioModel');
 
-exports.createUsuario = async (res,req,next) => {
+exports.createUsuario = async (req,res,next) => {
     try{
         const dados = req.body;
 
@@ -12,4 +12,38 @@ exports.createUsuario = async (res,req,next) => {
         res.status(500).json({erro: error.message});
     }
 
+}
+
+exports.updateUsuario = async (req, res, next) =>{
+    try{
+        const id = req.params.id;
+        const dados = req.body;
+        const usuario = await Usuario.findByIdAndUpdate(id,dados,{new:true, runValidators: true});
+        res.status(200).json(usuario);
+    }catch(err){
+        res.status(500).json({erro: "Erro ao atualizar usuario", detalhes: err.message});
+    }
+}
+
+exports.getUsuario = async (req, res, next) => {
+    try{
+        const id = req.params.id;
+        const usuario = await Usuario.findById(id);
+
+        if(!usuario){
+            return res.status(404).json({messagem: "Usuario não encontrado"});
+        }
+        res.status(200).json(usuario);
+    }catch(err){
+        res.status(500).json({erro: "Erro ao buscar o usuario", detalhes: err.message});
+    }
+}
+
+exports.getAll = async (req, res, next) =>{
+    try{
+        const usuario = await Usuario.find();
+        res.status(200).json(usuario);
+    }catch(err){
+        res.status(500).json({erro: "Erro ao buscar usuarios", detalhes: err.message});
+    }
 }
