@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
@@ -14,6 +15,7 @@ mongoose.connect(process.env.CONNECTIONSTRING)
     .catch(e => console.log(e));
 
 app.use(express.json());
+app.use(cors());
 app.use("/",homeRoute);
 app.use("/usuario", usuarioRoute);
 module.exports = app;

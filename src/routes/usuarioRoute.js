@@ -6,5 +6,6 @@ route.post('/',usuarioController.createUsuario);
 route.put('/:id', usuarioController.updateUsuario);
 route.get('/:id', usuarioController.getUsuario);
 route.get('/', usuarioController.getAll);
+route.delete('/:id', usuarioController.deleteUsuario);
 
 module.exports = route;
